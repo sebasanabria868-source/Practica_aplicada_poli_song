@@ -7,18 +7,19 @@ import java.sql.SQLException;
 import co.edu.poli.model.correo;
 
 /**
- * DAO para la gestión de correos electrónicos en la base de datos.
+ * DAO (Data Access Object) para la entidad {@link correo}.
+ * Gestiona las operaciones básicas sobre la tabla correo
+ * en la base de datos MySQL.
  */
 public class correoDAO {
 
-    /**
-     * Constructor por defecto
-     */
+    /** Constructor vacío */
     public correoDAO() {}
 
     /**
-     * Crear correo
-     * @param obj Correo a registrar
+     * Crea un nuevo registro de correo en la base de datos.
+     * 
+     * @param obj Objeto {@link correo} con la información del correo a registrar.
      */
     public void createCorreo(correo obj) {
         String sql = "INSERT INTO correo (correo) VALUES (?)";
@@ -29,20 +30,21 @@ public class correoDAO {
             ps.setString(1, obj.getCorreo());
             ps.executeUpdate();
 
-            System.out.println("[200 OK] correoDAO -> createCorreo(): Correo registrado ✅");
+            System.out.println("correoDAO -> createCorreo: Correo registrado correctamente");
 
         } catch (SQLException e) {
-            System.out.println("[500 ERROR] correoDAO -> createCorreo(): " + e.getMessage());
+            System.out.println("correoDAO -> createCorreo: Error al registrar correo");
+            System.out.println("Detalles: " + e.getMessage());
         }
     }
 
     /**
-     * Leer un correo
-     * @param correo Correo a buscar
-     * @return Objeto correo si existe, null si no
+     * Busca un correo en la base de datos.
+     * 
+     * @param correo Dirección de correo a buscar.
+     * @return Objeto {@link correo} si existe, o {@code null} si no se encontró.
      */
     public correo readCorreo(String correo) {
-
         String sql = "SELECT correo FROM correo WHERE correo = ?";
         correo resultado = null;
 
@@ -54,21 +56,23 @@ public class correoDAO {
 
             if (rs.next()) {
                 resultado = new correo(rs.getString("correo"));
-                System.out.println("[200 OK] correoDAO -> readCorreo(): Correo encontrado ✅");
+                System.out.println("correoDAO -> readCorreo: Correo encontrado");
             } else {
-                System.out.println("[404 NOT FOUND] correoDAO -> readCorreo(): Correo no existe ❌");
+                System.out.println("correoDAO -> readCorreo: Correo no existe");
             }
 
         } catch (SQLException e) {
-            System.out.println("[500 ERROR] correoDAO -> readCorreo(): " + e.getMessage());
+            System.out.println("correoDAO -> readCorreo: Error al leer correo");
+            System.out.println("Detalles: " + e.getMessage());
         }
 
         return resultado;
     }
 
     /**
-     * Eliminar un correo
-     * @param correo Correo a eliminar
+     * Elimina un correo de la base de datos.
+     * 
+     * @param correo Dirección de correo a eliminar.
      */
     public void deleteCorreo(String correo) {
         String sql = "DELETE FROM correo WHERE correo = ?";
@@ -77,12 +81,17 @@ public class correoDAO {
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, correo);
-            ps.executeUpdate();
+            int rows = ps.executeUpdate();
 
-            System.out.println("[200 OK] correoDAO -> deleteCorreo(): Correo eliminado ✅");
+            if (rows > 0) {
+                System.out.println("correoDAO -> deleteCorreo: Correo eliminado");
+            } else {
+                System.out.println("correoDAO -> deleteCorreo: Correo no encontrado");
+            }
 
         } catch (SQLException e) {
-            System.out.println("[500 ERROR] correoDAO -> deleteCorreo(): " + e.getMessage());
+            System.out.println("correoDAO -> deleteCorreo: Error al eliminar correo");
+            System.out.println("Detalles: " + e.getMessage());
         }
     }
 }
