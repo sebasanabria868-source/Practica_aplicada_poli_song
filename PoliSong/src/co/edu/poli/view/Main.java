@@ -7,7 +7,7 @@ import co.edu.poli.model.*;
 public class Main {
     public static void main(String[] args) {
         System.out.println("===== INICIO PRUEBAS POLISONG =====");
-
+        
         // DAO Instances
         correoDAO correoDao = new correoDAO();
         administradorDAO adminDao = new administradorDAO();
