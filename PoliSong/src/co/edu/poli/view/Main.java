@@ -1,13 +1,13 @@
 package co.edu.poli.view;
 
-import java.util.Date;
-import co.edu.poli.datos.*;
-import co.edu.poli.model.*;
-
 public class Main {
     public static void main(String[] args) {
         System.out.println("===== INICIO PRUEBAS POLISONG =====");
-        
+    
+
+ 
+    
+      /* 
         // DAO Instances
         correoDAO correoDao = new correoDAO();
         administradorDAO adminDao = new administradorDAO();
@@ -74,5 +74,5 @@ public class Main {
         }
 
         System.out.println("===== FIN PRUEBAS POLISONG =====");
-    }
+    */}
 }

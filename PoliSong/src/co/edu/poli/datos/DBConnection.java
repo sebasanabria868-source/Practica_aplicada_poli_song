@@ -38,7 +38,7 @@ public class DBConnection {
     private static final String USER = "root";
 
     /** Contraseña del usuario de base de datos */
-    private static final String PASSWORD = "szaratep";
+    private static final String PASSWORD = "Sebas_1010";
 
     /** Instancia de conexión (Singleton) */
     private static Connection connection;
